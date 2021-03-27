@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import { View,Text, StyleSheet, Button,ScrollView, TextInput} from 'react-native'
+import { View,Text, StyleSheet, Button,ScrollView, TextInput,Alert} from 'react-native'
 
 
-const Login = () => {
+const Login = (props) => {
 
     const [state, setState] = useState({
-        username :'',
+        user :'',
         password: ''
     });
 
@@ -13,35 +13,58 @@ const Login = () => {
         setState({...state,[name]: value});
     };
 
-    function envio(state){
-        console.log(state);
-        fetch('http://localhost:8080/login',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded, ','Access-Control-Allow-Origin': '*'
-            },
-            body: JSON.stringify(state)
-        }).then(res => console.log(res.json()))
-          .then(data => {
-            console.log('data->',data);
-          })
-          .catch(rejected => {
-              console.log('catch ->',rejected);
-          });
-    }
+    const auth = async(str)=> {
+      if( str.user === '' && str.password === ''){
+        alert('No puede dejar los campos vacios')
+     }else if(str.user === ''){
+        alert('Ingrese nombre de Usuario o Email')
+      }else if(str.password === ''){ 
+        alert('Ingrese una Contraseña')
+      }else{
 
+      const User = encodeURIComponent(str.user);
+      const Password = encodeURIComponent(str.password);
+      const requestBody = `user=${User}&password=${Password}`;
+
+      function obtenerToken(tkn){
+        console.log('token: ',tkn)
+      }
+
+     await fetch(`http://localhost:8080/user`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: requestBody
+        })
+        .then(function(response){ 
+            response.json()
+          .then(function(responseServer) { 
+            obtenerToken(responseServer.token)
+             alert('Login Sucess!! :D')
+             props.navigation.navigate('Product')
+            })
+            .catch(function(e){
+              console.log(e);
+              alert('Lo sentimos, ah ocurrido un error ',e)
+            });
+        })
+          .catch(function(e){
+              console.log(e);
+              alert(e)
+            });
+      } 
+    }
 
     return (
         <ScrollView style={styles.container}>
             <View><Text style={styles.text}>AreSolutions Clinic</Text></View>
             <View>
-                <TextInput style={styles.inputs} onChangeText={(value) => recuperarDatos('username',value)} placeholder="Email"/>
+                <TextInput style={styles.inputs} onChangeText={(value) => recuperarDatos('user',value)} placeholder="Email"/>
             </View>
             <View>
                 <TextInput style={styles.inputs}  secureTextEntry={true} onChangeText={(value) => recuperarDatos('password',value)} placeholder="Contraseña"/>
             </View>
             <View>
-            <Button color="#000000" onPress={() => envio(state)} title="Log in"/>
+            <Button color="#000000" onPress={() => auth(state)} title="Log in"/>
             </View>
         </ScrollView>
     )

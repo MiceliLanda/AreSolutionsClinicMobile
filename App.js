@@ -4,15 +4,15 @@ import {Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-
-
 const stack = createStackNavigator();
-import loginView from "./views/Login";
+import Login from "./views/Login";
+import Product from './views/Product'
 
 function MyStack(){
   return(
     <stack.Navigator>
-      <stack.Screen name="Login" component= { loginView } />
+      <stack.Screen name="Login" component= { Login } />
+      <stack.Screen name="Product" component= { Product } />
     </stack.Navigator>
   )
 }
