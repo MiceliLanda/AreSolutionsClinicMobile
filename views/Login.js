@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Button, ScrollView, TextInput, Alert } from 'react-native'
+import { View, StyleSheet, ScrollView, TextInput, Alert } from 'react-native'
+import { Icon, Input, Button, Text } from 'react-native-elements';
 
 
 const Login = (props) => {
@@ -39,9 +40,9 @@ const Login = (props) => {
           response.json()
             .then(function (responseServer) {
               obtenerToken(responseServer.token)
-              alert('Login Sucess!! :D')
+              /* alert('Login Sucess!! :D') */
               //console.log(responseServer.token); asi esta bien escrito
-              props.navigation.navigate('Product', { token: responseServer.token })
+              props.navigation.navigate('Menu', { token: responseServer.token })
             })
             .catch(function (e) {
               console.log(e);
@@ -56,16 +57,16 @@ const Login = (props) => {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <View><Text style={styles.text}>AreSolutions Clinic</Text></View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <View><Text h3 h3Style={styles.title}>AreSolutions Clinic</Text></View>
       <View>
-        <TextInput style={styles.inputs} onChangeText={(value) => recuperarDatos('user', value)} placeholder="Email" />
+        <Input style={styles.inputs} onChangeText={(value) => recuperarDatos('user', value)} placeholder="Email" />
       </View>
       <View>
-        <TextInput style={styles.inputs} secureTextEntry={true} onChangeText={(value) => recuperarDatos('password', value)} placeholder="Contraseña" />
+        <Input style={styles.inputs} secureTextEntry={true} onChangeText={(value) => recuperarDatos('password', value)} placeholder="Contraseña" />
       </View>
       <View>
-        <Button color="#000000" onPress={() => auth(state)} title="Log in" />
+        <Button buttonStyle={styles.btn} color="#000000" onPress={() => auth(state)} title="Log in" />
       </View>
     </ScrollView>
   )
@@ -76,23 +77,27 @@ export default Login
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 35
+    padding: 35,
+    justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
+    /*     fontSize: 20, */
     padding: 10,
     textAlign: 'center',
+    fontFamily: 'Monserrat'
   },
   inputs: {
     backgroundColor: "#f1f1f1",
     borderWidth: 1,
     textAlign: 'center',
     /* width:300, */
-    margin: 10,
-    alignItems: 'stretch'
+    margin: 5,
+    alignItems: 'stretch',
+    borderWidth: 0,
+    fontFamily: 'Monserrat'
   },
   btn: {
-    backgroundColor: "#20B685",
+    backgroundColor: "#560086",
     borderRadius: 50,
     height: 35,
     alignItems: 'center'

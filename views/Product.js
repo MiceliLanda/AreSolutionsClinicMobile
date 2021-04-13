@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Image } from 'react-native';
 import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Avatar, Card, Icon, ListItem } from 'react-native-elements';
+import { Avatar, Card, Divider, Icon, ListItem } from 'react-native-elements';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Product = (props) => {
 
@@ -46,38 +47,32 @@ const Product = (props) => {
     }, [])
 
     return (
-        <ScrollView>
-            <Text style={styles.title} > Tienda Online</Text >
-            {
-                products.map(product => {
-                    const urlPhoto = 'http://localhost:8080' + product.photo
-                    return (
-                        /*                         <ListItem key={product.id} bot>
-                                                    <ListItem.Chevron />
-                                                    <ListItem.Content>
-                                                        <ListItem.Title>{product.name}</ListItem.Title>
-                                                        <ListItem.Subtitle>{product.description}</ListItem.Subtitle>
-                                                    </ListItem.Content>
-                                                </ListItem> 
-                                                <Avatar source={{ uri: prueba }} rounded />*/
-                        <Card key={product.id}>
-                            <Card.Title style={styles.titleCard}>{product.name}</Card.Title>
-                            <Card.Divider />
-                            <Card.Image source={{ uri: urlPhoto }} style={styles.imageContent}></Card.Image>
-                            <Card.Divider />
-                            <Text style={styles.textContentCard}>{product.description}</Text>
-                            <Text style={styles.textContentCard}>Precio: {product.price}</Text>
-                            <Text style={styles.textContentCard}>Existencia: {product.existence}</Text>
-                            <Button
-                                icon={<Icon name='code' color='#ffffff' size='40' type='clear' />}
-                                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, }}
-                                title='BUY'
-                            />
-                        </Card>
-                    )
-                })
-            }
-        </ScrollView>
+        <View style={{ flex: 1 }} >
+            <ScrollView>
+                <Text style={styles.title} > Tienda Online</Text >
+                {
+                    products.map(product => {
+                        const urlPhoto = 'http://localhost:8080' + product.photo
+                        return (
+                            <Card key={product.id}>
+                                <Card.Title style={styles.titleCard}>{product.name}</Card.Title>
+                                <Card.Divider />
+                                <Card.Image source={{ uri: urlPhoto }} style={styles.imageContent}></Card.Image>
+                                <Card.Divider />
+                                <Text style={styles.textContentCard}>{product.description}</Text>
+                                <Text style={styles.textContentCard}>Precio: {product.price}</Text>
+                                <Text style={styles.textContentCard}>Existencia: {product.existence}</Text>
+                                <Button
+                                    icon={<Icon name='code' color='#ffffff' size='40' type='clear' />}
+                                    buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, }}
+                                    title='BUY'
+                                />
+                            </Card>
+                        )
+                    })
+                }
+            </ScrollView>
+        </View>
     )
 }
 
