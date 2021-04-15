@@ -128,7 +128,7 @@ const Carrito = (props) => {
     }
 
     const deleteProductCarrito = async (index) => {
-        const requesBody = `{ }`
+        const requestBody = `{ }`
         await fetch('http://localhost:8080/API/carritoJSON/delete/' + index, {
             method: 'DELETE',
             headers: {
@@ -136,7 +136,7 @@ const Carrito = (props) => {
                 'Content-Type': 'application/json;charset=UTF-8',
                 'accept': 'application/json;charset=UTF-8'
             },
-            body: requesBody
+            body: requestBody
         })
             .then((responseServer) => {
                 /* console.log(responseServer) */
