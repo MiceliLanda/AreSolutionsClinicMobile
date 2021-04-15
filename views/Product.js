@@ -65,7 +65,10 @@ const Product = (props) => {
                                 <Button
                                     icon={<Icon name='code' color='#ffffff' size='40' type='clear' />}
                                     buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, }}
-                                    title='BUY'
+                                    title='Agregar al carrito'
+                                    /* alert('Agregado al carrito exitosamente') */
+                                    /* onPress={() => { console.log("ID: ", product.id) }} */
+                                    onPress={() => { props.navigation.navigate('Carrito', { idProducto: product.id }) }}
                                 />
                             </Card>
                         )

@@ -11,6 +11,7 @@ const Tab = createMaterialBottomTabNavigator();
 const TabScreen = (props) => {
 
     const token = props.route.params.token
+    const idProducto = null
 
     return (
         <Tab.Navigator
@@ -41,6 +42,7 @@ const TabScreen = (props) => {
             />
             <Tab.Screen
                 name="Carrito"
+                initialParams={{ idProducto, token }}
                 component={Carrito}
                 options={{
                     tabBarLabel: 'Carrito',

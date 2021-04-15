@@ -9,6 +9,7 @@ import Product from './views/Product'
 import Carrito from './views/Carrito';
 import Menu from './views/Menu';
 import TabScreen from './views/TabScreen';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 function MyStack() {
   return (
@@ -34,7 +35,10 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <MyStack />
+      <SafeAreaProvider>
+        <MyStack />
+      </SafeAreaProvider>
+
     </NavigationContainer>
 
   );
