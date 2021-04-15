@@ -96,31 +96,57 @@ const Carrito = (props) => {
         console.log("fecha: ", fechaHoy);
         const id_user = 2
         const total = suma
-        const metodo_pago = 'Efectivo'
+        const metodo_pago = namePay
         const fecha = fechaHoy
         //const requestBody = `id_user=${id_user}&total=${total}&metodo_pago=${metodo_pago}&fecha=${fecha}`
         const requestBody = `{ "id_user":"${id_user}","total":"${total}","metodo_pago":"${metodo_pago}","fecha":"${fecha}" }`
         console.log("aberqwe: ", requestBody);
 
-        await fetch('http://localhost:8080/API/carritoJSON/venta', {
-            method: 'POST',
+        if (suma == 0) {
+            alert('Debe tener productos en el carrito')
+        } else {
+            await fetch('http://localhost:8080/API/carritoJSON/venta', {
+                method: 'POST',
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'accept': 'application/json;charset=UTF-8'
+                },
+                body: requestBody
+            })
+                .then((response) => response.json())
+                .then((responseServer) => {
+                    console.log(responseServer)
+                    alert('Su compra ha sido un exito')
+                    getCarrito()
+                })
+                .catch((e) => {
+                    console.log(e);
+                    alert('Lo sentimos, ah ocurrido un error ', e)
+                })
+        }
+    }
+
+    const deleteProductCarrito = async (index) => {
+        const requesBody = `{ }`
+        await fetch('http://localhost:8080/API/carritoJSON/delete/' + index, {
+            method: 'DELETE',
             headers: {
                 Authorization: 'Bearer ' + token,
                 'Content-Type': 'application/json;charset=UTF-8',
                 'accept': 'application/json;charset=UTF-8'
             },
-            body: requestBody
+            body: requesBody
         })
-            .then((response) => response.json())
-            .then((responseServer) => { console.log(responseServer) })
+            .then((responseServer) => {
+                /* console.log(responseServer) */
+                alert('Se ha eliminado de tu carrito')
+                getCarrito()
+            })
             .catch((e) => {
                 console.log(e);
                 alert('Lo sentimos, ah ocurrido un error ', e)
             })
-    }
-
-    const deleteProductCarrito = () => {
-
     }
 
     return (
@@ -141,11 +167,10 @@ const Carrito = (props) => {
                                 <Text style={styles.textContentCard}>{carrito.description}</Text>
                                 <Text style={styles.textContentCard}>Precio: {carrito.price}</Text>
                                 <Button
-                                    /* icon={<Icon name='code' color='#ffffff' size='40' type='clear' />} */
                                     buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, }}
                                     title='Eliminar al carrito'
-                                /* onPress={() => { console.log("ID: ", product.id) }} */
-                                /* onPress={() => { props.navigation.navigate('Carrito', { idProducto: product.id }) }} */
+                                    /* onPress={() => { console.log("IDArray: ", index) }} */
+                                    onPress={() => deleteProductCarrito(carrito.id)}
                                 />
                             </Card>
                         )
