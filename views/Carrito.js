@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet } from 'react-native';
-import { Text } from 'react-native'
-import { View } from "react-native"
-import { Button, Card, CheckBox, Icon, PricingCard } from 'react-native-elements';
+import { Text, View } from 'react-native'
+import { Button, Card, CheckBox, PricingCard, ListItem, Avatar } from 'react-native-elements';
 
 const Carrito = (props) => {
 
@@ -14,6 +13,7 @@ const Carrito = (props) => {
     let suma = 0
 
     useEffect(() => {
+        //console.log("id del producto: ", id);
         if (id == null) {
             getCarrito()
         } else {
@@ -33,7 +33,7 @@ const Carrito = (props) => {
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log("aver: ", responseJson.carritoList);
+                //console.log("aver: ", responseJson.carritoList);
                 for (let i = 0; i < responseJson.carritoList.length; i++) {
                     const { id, name, description, price, existence, photo } = responseJson.carritoList[i]
                     carrito.push({
@@ -47,9 +47,9 @@ const Carrito = (props) => {
                     /* console.log(responseJson.carritoList[i].price); */
                     /* suma = suma + responseJson.carritoList[i].price */
                 }
-                console.log(carrito);
+                //console.log(carrito);
                 setIdProducts(carrito)
-                console.log("size tienda:", responseJson.carritoList.length);
+                //console.log("size tienda:", responseJson.carritoList.length);
             })
             .catch((error) => {
                 console.log(error);
@@ -81,9 +81,9 @@ const Carrito = (props) => {
                     })
                 }
                 /* suma = suma + responseJson.carritoList[i].price */
-                console.log(carrito);
+                //console.log(carrito);
                 setIdProducts(carrito)
-                console.log("size tienda:", responseJson.carritoList.length);
+                //console.log("size tienda:", responseJson.carritoList.length);
             })
             .catch((error) => {
                 console.log(error);
@@ -93,14 +93,14 @@ const Carrito = (props) => {
     const postPagar = async () => {
         const dateNow = new Date()
         const fechaHoy = "" + dateNow.getFullYear() + "-0" + (dateNow.getMonth() + 1) + "-" + dateNow.getDate() + ""
-        console.log("fecha: ", fechaHoy);
+        //console.log("fecha: ", fechaHoy);
         const id_user = 2
         const total = suma
         const metodo_pago = namePay
         const fecha = fechaHoy
         //const requestBody = `id_user=${id_user}&total=${total}&metodo_pago=${metodo_pago}&fecha=${fecha}`
         const requestBody = `{ "id_user":"${id_user}","total":"${total}","metodo_pago":"${metodo_pago}","fecha":"${fecha}" }`
-        console.log("aberqwe: ", requestBody);
+        //console.log("aberqwe: ", requestBody);
 
         if (suma == 0) {
             alert('Debe tener productos en el carrito')
@@ -150,7 +150,7 @@ const Carrito = (props) => {
     }
 
     return (
-        <View style={{ flex: 1 }} >
+        <View style={{ flex: 1, backgroundColor: '#F2E4EC' }} >
             <ScrollView>
                 <Text style={styles.title} >Carrito</Text>
                 {
@@ -158,42 +158,43 @@ const Carrito = (props) => {
                         suma += carrito.price
                         const urlPhoto = 'http://localhost:8080' + carrito.photo
                         return (
-                            <Card key={index}>
-                                <Text>IDProducto: {carrito.id}, IDArray: {index}</Text>
-                                <Card.Title style={styles.titleCard}>{carrito.name}</Card.Title>
-                                <Card.Divider />
-                                <Card.Image source={{ uri: urlPhoto }} style={styles.imageContent}></Card.Image>
-                                <Card.Divider />
-                                <Text style={styles.textContentCard}>{carrito.description}</Text>
-                                <Text style={styles.textContentCard}>Precio: {carrito.price}</Text>
+                            <ListItem key={index} bottomDivider style={styles.ItemList}>
+                                <Avatar source={{ uri: urlPhoto }} />
+                                <ListItem.Content>
+                                    <ListItem.Title style={styles.titleCard} >{carrito.name} </ListItem.Title>
+                                    <ListItem.Subtitle>{carrito.description} </ListItem.Subtitle>
+                                    <ListItem.Subtitle style={styles.textContentCard} >Precio: {carrito.price} </ListItem.Subtitle>
+                                </ListItem.Content>
                                 <Button
                                     buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, }}
-                                    title='Eliminar al carrito'
-                                    /* onPress={() => { console.log("IDArray: ", index) }} */
-                                    onPress={() => deleteProductCarrito(carrito.id)}
+                                    title='Eliminar'
+                                    onPress={() => deleteProductCarrito(index)}
                                 />
-                            </Card>
+                            </ListItem>
                         )
                     })
                 }
                 <View>
-                    <Text>Metodo de Pago</Text>
-                    <CheckBox
-                        title='Tarjeta'
-                        checked={!checked}
-                        onPress={() => toggleChecked(!checked)}
-                        onPressOut={() => setNamePay('Tarjeta')}
-                    />
-                    <CheckBox
-                        title='Efectivo'
-                        checked={checked}
-                        onPress={() => toggleChecked(!checked)}
-                        onPressOut={() => setNamePay('Efectivo')}
-                    />
+                    <Card>
+                        <Card.Title>Metodo de Pago</Card.Title>
+                        <Card.Divider />
+                        <CheckBox
+                            title='Tarjeta'
+                            checked={!checked}
+                            onPress={() => toggleChecked(!checked)}
+                            onPressOut={() => setNamePay('Tarjeta')}
+                        />
+                        <CheckBox
+                            title='Efectivo'
+                            checked={checked}
+                            onPress={() => toggleChecked(!checked)}
+                            onPressOut={() => setNamePay('Efectivo')}
+                        />
+                    </Card>
                 </View>
                 <View>
                     <PricingCard
-                        color="#4f9deb"
+                        color="#3E5560"
                         title="Datos de Pago"
                         price={'$' + suma}
                         info={['Metodo de pago: ' + namePay]}
@@ -211,29 +212,28 @@ const styles = StyleSheet.create({
         marginTop: 16,
         paddingVertical: 8,
         borderWidth: 4,
-        borderColor: '#20232a',
+        marginRight: 15,
+        marginLeft: 15,
+        //borderColor: '#20232a',
         borderRadius: 6,
         backgroundColor: '#61dafb',
-        color: '#20232a',
+        //color: '#20232a',
         textAlign: 'center',
-        fontSize: 30,
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontWeight: 'bold'
     },
     titleCard: {
-        fontSize: 30,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+    },
+    ItemList: {
+        marginTop: 10,
+        marginLeft: 15,
+        marginRight: 15
     },
     textContentCard: {
         fontStyle: 'italic',
         textAlign: 'center',
-        fontSize: 20,
         paddingBottom: 5
-    },
-    imageContent: {
-        width: 300,
-        height: 200,
-        /*         position: 'relative', */
-        resizeMode: 'contain'
     },
 })
 

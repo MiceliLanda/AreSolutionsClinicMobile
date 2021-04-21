@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, ScrollView, TextInput, Alert } from 'react-native'
-import { Icon, Input, Button, Text } from 'react-native-elements';
-
+import { View, StyleSheet, ScrollView } from 'react-native'
+import { Input, Button, Text, Avatar, Icon } from 'react-native-elements';
+import avatarLogo from '../img/avatar.jpg'
 
 const Login = (props) => {
 
@@ -40,8 +40,7 @@ const Login = (props) => {
           response.json()
             .then(function (responseServer) {
               obtenerToken(responseServer.token)
-              /* alert('Login Sucess!! :D') */
-              //console.log(responseServer.token); asi esta bien escrito
+              alert('Login Sucess!! :D')
               props.navigation.navigate('Menu', { token: responseServer.token })
             })
             .catch(function (e) {
@@ -58,15 +57,24 @@ const Login = (props) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View><Text h3 h3Style={styles.title}>AreSolutions Clinic</Text></View>
-      <View>
-        <Input style={styles.inputs} onChangeText={(value) => recuperarDatos('user', value)} placeholder="Email" />
-      </View>
-      <View>
-        <Input style={styles.inputs} secureTextEntry={true} onChangeText={(value) => recuperarDatos('password', value)} placeholder="Contraseña" />
-      </View>
-      <View>
-        <Button buttonStyle={styles.btn} color="#000000" onPress={() => auth(state)} title="Log in" />
+      <View style={{ backgroundColor: '#11698E', borderRadius: 10, paddingVertical: 20, paddingHorizontal: 20 }}>
+        <View style={styles.avatarCenter}>
+          <Avatar
+            size='xlarge'
+            rounded
+            source={{ uri: avatarLogo }}
+          />
+        </View>
+        <View><Text h3 h3Style={styles.title}>AreSolutions Clinic</Text></View>
+        <View>
+          <Input style={styles.inputs} onChangeText={(value) => recuperarDatos('user', value)} placeholder="Email" />
+        </View>
+        <View>
+          <Input style={styles.inputs} secureTextEntry={true} onChangeText={(value) => recuperarDatos('password', value)} placeholder="Contraseña" />
+        </View>
+        <View>
+          <Button buttonStyle={styles.btn} onPress={() => auth(state)} title="Iniciar Sesion" />
+        </View>
       </View>
     </ScrollView>
   )
@@ -79,34 +87,32 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 35,
     justifyContent: 'center',
+    backgroundColor: '#E8E8EF'
+  },
+  avatarCenter: {
+    alignItems: 'center'
   },
   title: {
-    /*     fontSize: 20, */
     padding: 10,
     textAlign: 'center',
-    fontFamily: 'Monserrat'
+    color: 'white',
+    fontFamily: 'Monserrat',
+    fontStyle: 'italic'
   },
   inputs: {
+    borderRadius: 10,
     backgroundColor: "#f1f1f1",
     borderWidth: 1,
     textAlign: 'center',
-    /* width:300, */
     margin: 5,
     alignItems: 'stretch',
     borderWidth: 0,
     fontFamily: 'Monserrat'
   },
   btn: {
-    backgroundColor: "#560086",
+    backgroundColor: "#1E1E1E",
     borderRadius: 50,
     height: 35,
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  text: {
-    fontSize: 20,
-    padding: 5,
-    alignSelf: 'center',
-    color: 'black',
-  },
-
 });

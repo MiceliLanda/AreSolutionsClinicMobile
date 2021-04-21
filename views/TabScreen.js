@@ -15,9 +15,9 @@ const TabScreen = (props) => {
 
     return (
         <Tab.Navigator
-            initialRouteName="Menu"
-            activeColor="#e91e63"
-            barStyle={{ backgroundColor: 'tomato' }}
+            initialRouteName="Tienda"
+            activeColor="#F1F1F1"
+            barStyle={{ backgroundColor: '#11698E' }}
         >
             <Tab.Screen
                 name="Menu"
@@ -25,7 +25,7 @@ const TabScreen = (props) => {
                 options={{
                     tabBarLabel: 'Menu',
                     tabBarIcon: ({ color }) => (
-                        <Icon name="home" color={color} size={26} />
+                        <Icon name="home" color={color} size={20} />
                     ),
                 }}
             />
@@ -36,7 +36,7 @@ const TabScreen = (props) => {
                 options={{
                     tabBarLabel: 'Tienda Online',
                     tabBarIcon: ({ color }) => (
-                        <Icon name="menu" color={color} size={26} />
+                        <Icon name="menu" color={color} size={20} />
                     ),
                 }}
             />
@@ -47,7 +47,7 @@ const TabScreen = (props) => {
                 options={{
                     tabBarLabel: 'Carrito',
                     tabBarIcon: ({ color }) => (
-                        <Icon name="layers" color={color} size={26} />
+                        <Icon name="layers" color={color} size={20} />
                     ),
                 }}
             />

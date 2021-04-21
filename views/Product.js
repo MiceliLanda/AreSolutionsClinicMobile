@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { Image } from 'react-native';
+import { useEffect, useState } from 'react';
 import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Avatar, Card, Divider, Icon, ListItem } from 'react-native-elements';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Card, Icon } from 'react-native-elements';
 
 const Product = (props) => {
 
@@ -47,7 +44,7 @@ const Product = (props) => {
     }, [])
 
     return (
-        <View style={{ flex: 1 }} >
+        <View style={{ flex: 1, backgroundColor: '#F2E4EC' }} >
             <ScrollView>
                 <Text style={styles.title} > Tienda Online</Text >
                 {
@@ -59,15 +56,13 @@ const Product = (props) => {
                                 <Card.Divider />
                                 <Card.Image source={{ uri: urlPhoto }} style={styles.imageContent}></Card.Image>
                                 <Card.Divider />
-                                <Text style={styles.textContentCard}>{product.description}</Text>
-                                <Text style={styles.textContentCard}>Precio: {product.price}</Text>
-                                <Text style={styles.textContentCard}>Existencia: {product.existence}</Text>
+                                <Text style={styles.textDescription}>{product.description}</Text>
+                                <Text style={styles.textPrice}>Precio: {product.price}</Text>
+                                {/* <Text style={styles.textContentCard}>Existencia: {product.existence}</Text> */}
                                 <Button
                                     icon={<Icon name='code' color='#ffffff' size='40' type='clear' />}
-                                    buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, }}
+                                    buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
                                     title='Agregar al carrito'
-                                    /* alert('Agregado al carrito exitosamente') */
-                                    /* onPress={() => { console.log("ID: ", product.id) }} */
                                     onPress={() => { props.navigation.navigate('Carrito', { idProducto: product.id }) }}
                                 />
                             </Card>
@@ -80,13 +75,10 @@ const Product = (props) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 0,
-        alignSelf: 'center',
-        padding: 10,
-    },
     title: {
-        marginTop: 16,
+        marginTop: 15,
+        marginRight: 15,
+        marginLeft: 15,
         paddingVertical: 8,
         borderWidth: 4,
         borderColor: '#20232a',
@@ -94,14 +86,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#61dafb',
         color: '#20232a',
         textAlign: 'center',
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: 'bold',
     },
     titleCard: {
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: 'bold'
     },
-    textContentCard: {
+    textDescription: {
+        textAlign: 'center',
+        fontSize: 22,
+        paddingBottom: 5
+    },
+    textPrice: {
         fontStyle: 'italic',
         textAlign: 'center',
         fontSize: 20,
@@ -110,11 +107,10 @@ const styles = StyleSheet.create({
     imageContent: {
         width: 300,
         height: 200,
-        /*         position: 'relative', */
         resizeMode: 'contain'
     },
     buttonText: {
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: 'bold'
     }
 })
