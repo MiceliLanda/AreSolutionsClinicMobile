@@ -27,10 +27,6 @@ const Login = (props) => {
       const Password = encodeURIComponent(str.password);
       const requestBody = `user=${User}&password=${Password}`;
 
-      function obtenerToken(tkn) {
-        console.log('token: ', tkn)
-      }
-
       await fetch(`http://localhost:8080/user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -40,19 +36,18 @@ const Login = (props) => {
           console.log("response: ", response);
           response.json()
             .then(function (responseServer) {
-              obtenerToken(responseServer.token)
-              if(responseServer.token === null){
+              if(responseServer.token === null || responseServer.token == undefined){
                 alert('Lo sentimos, ah ocurrido un error');
                 console.log(responseServer.token);
               }else{
-                alert('Login Sucess!! :D')
-                console.log(responseServer.token);
-                console.log(`ID DEL USUARIO LOGEADO ${responseServer.userId}`);
-               props.navigation.navigate('Product')
+                if(responseServer.userId === 1){
+                   alert('Oh,Oh, Solo pueden ingresar Owners :(')
+                }else{               
+                  alert('Login Sucess!! :D')
+                  console.log("ver: ", responseServer);
+                  props.navigation.navigate('Menu', { token: responseServer.token , idUser : responseServer.userId})
+                }
               }
-              alert('Login Sucess!! :D')
-              console.log("ver: ", responseServer);
-              props.navigation.navigate('Menu', { token: responseServer.token , idUser : responseServer.userId})
             })
             .catch(function (e) {
               console.log(e);
