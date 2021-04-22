@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet } from 'react-native';
-import { Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button, Card, CheckBox, PricingCard, ListItem, Avatar } from 'react-native-elements';
 
 const Carrito = (props) => {

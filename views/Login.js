@@ -37,12 +37,10 @@ const Login = (props) => {
         body: requestBody
       })
         .then(function (response) {
-          console.log("response: ", response);
           response.json()
             .then(function (responseServer) {
               obtenerToken(responseServer.token)
               alert('Login Sucess!! :D')
-              console.log("ver: ", responseServer);
               props.navigation.navigate('Menu', { token: responseServer.token })
             })
             .catch(function (e) {

@@ -1,10 +1,10 @@
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { Icon } from 'react-native-elements';
+
 import React from 'react';
 import Menu from './Menu';
 import Product from './Product';
 import Carrito from './Carrito';
-
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Icon } from 'react-native-elements';
 
 const Tab = createMaterialBottomTabNavigator();
 
