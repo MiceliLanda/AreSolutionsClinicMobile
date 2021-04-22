@@ -33,9 +33,9 @@ const Login = (props) => {
         body: requestBody
       })
         .then(function (response) {
-          console.log("response: ", response);
           response.json()
             .then(function (responseServer) {
+<<<<<<< HEAD
               if(responseServer.token === null || responseServer.token == undefined){
                 alert('Lo sentimos, ah ocurrido un error');
                 console.log(responseServer.token);
@@ -48,6 +48,11 @@ const Login = (props) => {
                   props.navigation.navigate('Menu', { token: responseServer.token , idUser : responseServer.userId})
                 }
               }
+=======
+              obtenerToken(responseServer.token)
+              alert('Login Sucess!! :D')
+              props.navigation.navigate('Menu', { token: responseServer.token })
+>>>>>>> Edwin
             })
             .catch(function (e) {
               console.log(e);
