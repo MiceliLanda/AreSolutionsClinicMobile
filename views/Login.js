@@ -41,6 +41,14 @@ const Login = (props) => {
           response.json()
             .then(function (responseServer) {
               obtenerToken(responseServer.token)
+              if(responseServer.token === null){
+                alert('Lo sentimos, ah ocurrido un error');
+                console.log(responseServer.token);
+              }else{
+                alert('Login Sucess!! :D')
+                console.log(responseServer.token);
+               props.navigation.navigate('Product')
+              }
               alert('Login Sucess!! :D')
               console.log("ver: ", responseServer);
               props.navigation.navigate('Menu', { token: responseServer.token })
