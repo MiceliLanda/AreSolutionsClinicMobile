@@ -5,3 +5,11 @@ DOCUMENTO DE PLANIFICACION: https://docs.google.com/presentation/d/1LjE9l4-8djDF
 TABLERO DE JIRA: https://solutionsclinic3.atlassian.net/jira/software/projects/A0/boards/1
 
 MATRICULA Y NOMBRE DE LOS ALUMNOS: 183433 - DAVILA ASTUDILLO EDWIN (SCRUM MASTER) 183381 - MICELI LANDA JHONATHAN DE JESUS 183423 - BALLINAS TRINIDAD LUIS EDUARDO
+
+Requisitos:
+Paso 1: Instalar Node 10 o superior y NPM
+Paso 2: Instalar EXPO => npm install -g expo-cli
+Paso 3: npm install
+Paso 4: expo start o npm start (para correr el proyecto)
+
+MANUAL DEL PROGRAMADOR: https://drive.google.com/file/d/1lUAjLC-oq6YOPss0dB2Jfg_KwOg7yQCy/view?usp=sharing

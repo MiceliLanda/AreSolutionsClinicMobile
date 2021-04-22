@@ -35,24 +35,18 @@ const Login = (props) => {
         .then(function (response) {
           response.json()
             .then(function (responseServer) {
-<<<<<<< HEAD
-              if(responseServer.token === null || responseServer.token == undefined){
+              if (responseServer.token === null || responseServer.token == undefined) {
                 alert('Lo sentimos, ah ocurrido un error');
                 console.log(responseServer.token);
-              }else{
-                if(responseServer.userId === 1){
-                   alert('Oh,Oh, Solo pueden ingresar Owners :(')
-                }else{               
+              } else {
+                if (responseServer.userId === 1) {
+                  alert('Oh,Oh, Solo pueden ingresar Owners :(')
+                } else {
                   alert('Login Sucess!! :D')
                   console.log("ver: ", responseServer);
-                  props.navigation.navigate('Menu', { token: responseServer.token , idUser : responseServer.userId})
+                  props.navigation.navigate('Menu', { token: responseServer.token, idUser: responseServer.userId })
                 }
               }
-=======
-              obtenerToken(responseServer.token)
-              alert('Login Sucess!! :D')
-              props.navigation.navigate('Menu', { token: responseServer.token })
->>>>>>> Edwin
             })
             .catch(function (e) {
               console.log(e);
