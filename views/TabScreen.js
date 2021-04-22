@@ -20,16 +20,6 @@ const TabScreen = (props) => {
             barStyle={{ backgroundColor: '#11698E' }}
         >
             <Tab.Screen
-                name="Menu"
-                component={Menu}
-                options={{
-                    tabBarLabel: 'Menu',
-                    tabBarIcon: ({ color }) => (
-                        <Icon name="home" color={color} size={20} />
-                    ),
-                }}
-            />
-            <Tab.Screen
                 name="Tienda"
                 initialParams={{ token }}
                 component={Product}
@@ -48,6 +38,16 @@ const TabScreen = (props) => {
                     tabBarLabel: 'Carrito',
                     tabBarIcon: ({ color }) => (
                         <Icon name="layers" color={color} size={20} />
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name="Menu"
+                component={Menu}
+                options={{
+                    tabBarLabel: 'Manual',
+                    tabBarIcon: ({ color }) => (
+                        <Icon name="home" color={color} size={20} />
                     ),
                 }}
             />
