@@ -47,11 +47,12 @@ const Login = (props) => {
               }else{
                 alert('Login Sucess!! :D')
                 console.log(responseServer.token);
+                console.log(`ID DEL USUARIO LOGEADO ${responseServer.userId}`);
                props.navigation.navigate('Product')
               }
               alert('Login Sucess!! :D')
               console.log("ver: ", responseServer);
-              props.navigation.navigate('Menu', { token: responseServer.token })
+              props.navigation.navigate('Menu', { token: responseServer.token , idUser : responseServer.userId})
             })
             .catch(function (e) {
               console.log(e);

@@ -12,6 +12,7 @@ const TabScreen = (props) => {
 
     const token = props.route.params.token
     const idProducto = null
+    const iduser = props.route.params.idUser
 
     return (
         <Tab.Navigator
@@ -32,7 +33,7 @@ const TabScreen = (props) => {
             />
             <Tab.Screen
                 name="Carrito"
-                initialParams={{ idProducto, token }}
+                initialParams={{ idProducto, token ,iduser}}
                 component={Carrito}
                 options={{
                     tabBarLabel: 'Carrito',

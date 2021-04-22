@@ -6,6 +6,7 @@ import { Button, Card, CheckBox, PricingCard, ListItem, Avatar } from 'react-nat
 const Carrito = (props) => {
 
     const id = props.route.params.idProducto;
+    const iduser = props.route.params.iduser
     const token = props.route.params.token
     const [idProducts, setIdProducts] = useState([])//db
     const [checked, toggleChecked] = useState(false);//checkbox
@@ -94,7 +95,7 @@ const Carrito = (props) => {
         const dateNow = new Date()
         const fechaHoy = "" + dateNow.getFullYear() + "-0" + (dateNow.getMonth() + 1) + "-" + dateNow.getDate() + ""
         //console.log("fecha: ", fechaHoy);
-        const id_user = 2
+        const id_user = iduser
         const total = suma
         const metodo_pago = namePay
         const fecha = fechaHoy
