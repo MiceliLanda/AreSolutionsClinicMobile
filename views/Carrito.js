@@ -23,7 +23,7 @@ const Carrito = (props) => {
 
     const getCarrito = async () => {
         const carrito = []
-        await fetch('http://localhost:8080/API/carritoJSON', {
+        await fetch('http://10.0.2.2:8080/API/carritoJSON', {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -58,7 +58,7 @@ const Carrito = (props) => {
 
     const addProduct = async () => {
         const carrito = []
-        await fetch('http://localhost:8080/API/carritoJSON/' + id, {
+        await fetch('http://10.0.2.2:8080/API/carritoJSON/' + id, {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -105,7 +105,7 @@ const Carrito = (props) => {
         if (suma == 0) {
             alert('Debe tener productos en el carrito')
         } else {
-            await fetch('http://localhost:8080/API/carritoJSON/venta', {
+            await fetch('http://10.0.2.2:8080/API/carritoJSON/venta', {
                 method: 'POST',
                 headers: {
                     Authorization: 'Bearer ' + token,
@@ -129,7 +129,7 @@ const Carrito = (props) => {
 
     const deleteProductCarrito = async (index) => {
         const requestBody = `{ }`
-        await fetch('http://localhost:8080/API/carritoJSON/delete/' + index, {
+        await fetch('http://10.0.2.2:8080/API/carritoJSON/delete/' + index, {
             method: 'DELETE',
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -156,7 +156,7 @@ const Carrito = (props) => {
                 {
                     idProducts.map((carrito, index) => {
                         suma += carrito.price
-                        const urlPhoto = 'http://localhost:8080' + carrito.photo
+                        const urlPhoto = 'http://10.0.2.2:8080' + carrito.photo
                         return (
                             <ListItem key={index} bottomDivider style={styles.ItemList}>
                                 <Avatar source={{ uri: urlPhoto }} />

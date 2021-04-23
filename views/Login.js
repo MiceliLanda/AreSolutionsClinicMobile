@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
-import { Input, Button, Text, Avatar, Icon } from 'react-native-elements';
-import avatarLogo from '../img/avatar.jpg'
+import { Input, Button, Text } from 'react-native-elements';
 
 const Login = (props) => {
 
@@ -27,7 +26,7 @@ const Login = (props) => {
       const Password = encodeURIComponent(str.password);
       const requestBody = `user=${User}&password=${Password}`;
 
-      await fetch(`http://localhost:8080/user`, {
+      await fetch(`http://10.0.2.2:8080/user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: requestBody
@@ -63,13 +62,6 @@ const Login = (props) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={{ backgroundColor: '#11698E', borderRadius: 10, paddingVertical: 20, paddingHorizontal: 20 }}>
-        <View style={styles.avatarCenter}>
-          <Avatar
-            size='xlarge'
-            rounded
-            source={{ uri: avatarLogo }}
-          />
-        </View>
         <View><Text h3 h3Style={styles.title}>AreSolutions Clinic</Text></View>
         <View>
           <Input style={styles.inputs} onChangeText={(value) => recuperarDatos('user', value)} placeholder="Email" />
@@ -94,14 +86,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#E8E8EF'
   },
-  avatarCenter: {
-    alignItems: 'center'
-  },
   title: {
     padding: 10,
     textAlign: 'center',
     color: 'white',
-    fontFamily: 'Monserrat',
+    /* fontFamily: 'Monserrat', */
     fontStyle: 'italic'
   },
   inputs: {
@@ -112,7 +101,7 @@ const styles = StyleSheet.create({
     margin: 5,
     alignItems: 'stretch',
     borderWidth: 0,
-    fontFamily: 'Monserrat'
+    /* fontFamily: 'Monserrat' */
   },
   btn: {
     backgroundColor: "#1E1E1E",

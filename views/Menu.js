@@ -3,7 +3,7 @@ import { Button, Alert, Linking, View, StyleSheet } from 'react-native';
 
 const Menu = () => {
     /* const token = props.route.params.token */
-    const urlManual = 'https://drive.google.com/file/d/1suEhA0bp29mRaNeILvPuzl1LepvLvUWh/view?usp=sharing'
+    const urlManual = 'https://drive.google.com/file/d/17EEN26C9qHg4-nWG-rk9aIhObmTtGrES/view?usp=sharing'
 
     const AbrirURLManual = ({ url, children }) => {
         const handlePress = useCallback(async () => {

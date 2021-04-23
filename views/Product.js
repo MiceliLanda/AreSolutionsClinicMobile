@@ -11,7 +11,7 @@ const Product = (props) => {
 
     useEffect(() => {
         const products = []
-        fetch('http://localhost:8080/API/tiendaJSON', {
+        fetch('http://10.0.2.2:8080/API/tiendaJSON', {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + token,
@@ -48,7 +48,7 @@ const Product = (props) => {
                 <Text style={styles.title} > Tienda Online</Text >
                 {
                     products.map(product => {
-                        const urlPhoto = 'http://localhost:8080' + product.photo
+                        const urlPhoto = 'http://10.0.2.2:8080' + product.photo
                         return (
                             <Card key={product.id}>
                                 <Card.Title style={styles.titleCard}>{product.name}</Card.Title>
